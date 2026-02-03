@@ -1,0 +1,21 @@
+{
+    "name": "dv/training-mvc",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "dv"
+        }
+    ],
+    "require-dev": {
+        "laravel/pint": "^1.27",
+        "symfony/var-dumper": "^8.0"
+    },
+    "require": {
+        "symfony/http-foundation": "^8.0",
+        "nikic/fast-route": "^1.3"
+    }
+}
