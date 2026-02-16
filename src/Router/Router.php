@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Router;
 
 
+use App\Exception\HttpException;
+use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +29,17 @@ class Router
 
         $routeInfo = $dispatcher->dispatch($method, $uri);
 
+        switch ($routeInfo[0]) {
+            case Dispatcher::NOT_FOUND:
+                throw new HttpException('404 Not Found', 404);
+            case Dispatcher::METHOD_NOT_ALLOWED:
+                throw new HttpException('405 Method Not Allowed', 405);
+            case Dispatcher::FOUND:
+                [$status, [$controller, $method], $vars] = $routeInfo;
+        }
+
         [$status, [$controller, $method], $vars] = $routeInfo;
+
 
         return [[$controller, $method], $vars];
     }

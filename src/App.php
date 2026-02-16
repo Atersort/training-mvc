@@ -24,12 +24,12 @@ class App
         try {
             [[$controller, $method], $vars] = $this->router->dispatcher($request);
 
-            $responce = call_user_func([new $controller, $method], $vars);
+            $response = call_user_func([new $controller, $method], $vars);
         } catch (\Throwable $exception) {
-            $response = new Response($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+            $response = new Response('EXCEPTION: ' . $exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return $responce;
+        return $response;
     }
 
 
