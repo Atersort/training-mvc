@@ -11,40 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Route
 {
-    public static function handler(Request $request): Response
+    public static function get(string $path, array $handler): array
     {
-        $dispatcher = simpleDispatcher(function (RouteCollector $collector) {
-            $collector->get('/', function () {
-                $content = 'Hello, World!';
+        return ['GET', $path, [$handler[0], $handler[1]]];
+    }
 
-                return new Response($content);
-            });
-
-            $collector->addGroup('/posts', function (RouteCollector $group) {
-                // Маршрут: /post (список всех постов)
-                $group->get('', function () {
-                    $content = 'Список всех постов';
-
-                    return new Response($content);
-                });
-
-                // Маршрут: /post/{id} (конкретный пост)
-                $group->get('/{id:\d+}', function (array $vars) {
-                    $content = "Просмотр поста с ID: " . $vars['id'];
-
-                    return new Response($content);
-                });
-            });
-        });
-
-        $httpMethod = $request->getMethod();
-        $uri = $request->getPathInfo();
-        $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
-
-        [$status, $handler, $vars] = $routeInfo;
-
-//        dd($status, $handler, $vars);
-
-        return $handler($vars);
+    public static function post(string $path, $controller, $action): array
+    {
+        return ['GET', $path, [$controller, $action]];
     }
 }
