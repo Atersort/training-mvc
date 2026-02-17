@@ -32,10 +32,10 @@ class Router
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 throw new HttpException('404 Not Found', 404);
-            case Dispatcher::METHOD_NOT_ALLOWED:
-                throw new HttpException('405 Method Not Allowed', 405);
             case Dispatcher::FOUND:
                 [$status, [$controller, $method], $vars] = $routeInfo;
+            case Dispatcher::METHOD_NOT_ALLOWED:
+                throw new HttpException('405 Method Not Allowed', 405);
         }
 
         [$status, [$controller, $method], $vars] = $routeInfo;

@@ -16,8 +16,8 @@ class Route
         return ['GET', $path, [$handler[0], $handler[1]]];
     }
 
-    public static function post(string $path, $controller, $action): array
+    public static function post(string $path, array $handler): array
     {
-        return ['GET', $path, [$controller, $action]];
+        return ['GET', $path, $path, [$handler[0], $handler[1]]];
     }
 }

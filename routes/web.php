@@ -7,7 +7,7 @@ use App\Router\Route;
 
 // Route->get('/', [HomeControllers::class, 'hello'])
 return [
-    Route::get('/', [HomeController::class, 'hello']),
+    Route::post('/', [HomeController::class, 'hello']),
     Route::get('/post', [HomeController::class, 'post']),
     Route::get('/post/{id:\d+}', [HomeController::class, 'postById'])
 
